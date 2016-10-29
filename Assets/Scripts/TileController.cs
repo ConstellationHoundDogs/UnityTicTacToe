@@ -7,6 +7,8 @@ public class TileController : MonoBehaviour {
 	public Game game;
 
 	void OnMouseDown() {
-		game.MakeMove (tile.XIndex, tile.YIndex);
+		if(game.inProgress){
+			game.MakeMove (tile.XIndex, tile.YIndex);
+		}
 	}
 }

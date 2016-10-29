@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Text;
+using UnityEngine.UI;
 
 public class TopController : MonoBehaviour {
 
@@ -9,11 +10,13 @@ public class TopController : MonoBehaviour {
 	public Sprite tileSpriteX;
 	public Sprite tileSpriteO;
 
+	public Button playAgainButton;
+	public Text gameOverText;
+
 	public float spriteXOffset;
 	public float spriteYOffset;
 
-	public bool aiOpponent;
-
+	private bool aiOpponent;
 	private Game game;
 	private Board board;
 	private AI ai;
@@ -47,6 +50,9 @@ public class TopController : MonoBehaviour {
 	void Awake () {
 		game = new Game ();
 		board = game.board;
+
+		aiOpponent = (GameController.instance.opponent == PlayWith.Computer);
+
 		if(aiOpponent){
 			ai = new AI (game, board, game.nextPlayer);
 		}
@@ -55,11 +61,16 @@ public class TopController : MonoBehaviour {
 	}
 		
 	void GameWon() {
-		Debug.Log (game.currentPlayer + " won!");
+		playAgainButton.gameObject.SetActive (true);
+		game.inProgress = false;
+
+		gameOverText.text = game.currentPlayer + " won!";
 	}
 
 	void GameDraw() {
-		Debug.Log ("Draw");
+		playAgainButton.gameObject.SetActive (true);
+		game.inProgress = false;
+		gameOverText.text = "Draw";
 	}
 
 	void ChangeTileSprite(Tile changedTile, SpriteRenderer spriteRenderer){

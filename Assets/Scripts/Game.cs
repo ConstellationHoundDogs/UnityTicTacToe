@@ -13,6 +13,7 @@ public class Game {
 
 	public TileState currentPlayer = TileState.O;
 	public TileState nextPlayer = TileState.X;
+	public bool inProgress = false;
 	public Board board;
 
 	private string[] winConditions = {
@@ -23,6 +24,7 @@ public class Game {
 
 	public Game(int boardDimention = 3)	{
 		board = new Board(boardDimention);
+		inProgress = true;
 	}
 
 	public void MakeMove(int x, int y){
