@@ -12,7 +12,7 @@ public class Board {
 		dimention = _dimention;
 		tiles = new Tile[dimention, dimention];
 
-		for(int i = 0; i < dimention; i++){
+		for (int i = 0; i < dimention; i++) {
 			for(int j = 0; j < dimention; j++){
 				tiles[i, j] = new Tile(this, i, j);
 			}
@@ -21,8 +21,8 @@ public class Board {
 	}
 
 	public void ClearBoard() {
-		for(int i = 0; i < dimention; i++){
-			for(int j = 0; j < dimention; j++){
+		for (int i = 0; i < dimention; i++) {
+			for (int j = 0; j < dimention; j++) {
 				tiles[i, j].SetTile(TileState.Empty);
 			}
 		}

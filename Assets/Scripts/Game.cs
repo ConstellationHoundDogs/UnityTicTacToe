@@ -27,12 +27,12 @@ public class Game {
 		inProgress = true;
 	}
 
-	public void MakeMove(int x, int y){
-		if(x < 0 && x >= board.dimention){
+	public void MakeMove(int x, int y) {
+		if (x < 0 && x >= board.dimention) {
 			Debug.LogError ("Game:MakeMove X is out of range");
 			return;
 		}
-		if(y < 0 && y >= board.dimention){
+		if (y < 0 && y >= board.dimention) {
 			Debug.LogError ("Game:MakeMove Y is out of range");
 			return;
 		}
@@ -49,18 +49,7 @@ public class Game {
 		}
 	}
 
-	public bool CheckForWinPosition() {
-
-		StringBuilder pattern = new StringBuilder("000000000");
-
-		for (int row = 0; row < board.dimention; ++row) {
-			for (int col = 0; col < board.dimention; ++col) {
-				if (board.tiles[row, col].State == currentPlayer) {
-					pattern[row * board.dimention + col] = '1';
-				}
-			}
-		}
-		//TODO: make code cleaner
+	private bool DetectLine(StringBuilder pattern) {
 		for (int i = 0; i < winConditions.Length; i++) {
 			int counter = 0;
 			for (int j = 0; j < winConditions[i].Length; j++) {
@@ -74,6 +63,21 @@ public class Game {
 		}
 
 		return false;
+	}
+
+	public bool CheckForWinPosition() {
+
+		StringBuilder pattern = new StringBuilder("000000000");
+
+		for (int row = 0; row < board.dimention; ++row) {
+			for (int col = 0; col < board.dimention; ++col) {
+				if (board.tiles[row, col].State == currentPlayer) {
+					pattern[row * board.dimention + col] = '1';
+				}
+			}
+		}
+
+		return DetectLine (pattern);
 	}
 
 }
